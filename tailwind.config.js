@@ -24,6 +24,8 @@ module.exports = {
           color: 'rgba(0, 0, 0, 0.1)',
         },
         width: {
+          '40-r':'40rem',
+          '35-r':'30rem',
           400: '400px',
           760: '760px',
           780: '780px',
@@ -33,7 +35,15 @@ module.exports = {
           1400: '1400px',
         },
         height: {
+          '40-r':'40rem',
+          '35-r':'30rem',
           80: '80px',
+        },
+        fontFamily: {
+          'poppins': ['Poppins', 'sans-serif']
+        },
+        boxShadow: {
+          '5xl': '20px 20px 50px rgba(0, 0, 0, 0.5)',
         },
         minHeight: {
           590: '590px',
