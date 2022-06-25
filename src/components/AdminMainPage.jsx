@@ -40,27 +40,28 @@ export default function AdminMainPage() {
         </div>
         <div>
           {/* Dashboard principal */}
-          <Link to="/ecommerce">Ecommerce</Link>
+          <Link to="/ecommerce">Tablero principal</Link>
 
           {/* Páginas*/}
-          <Link to="/orders">Orders</Link>
-          <Link to="/customers">Customers</Link>
-          <Link to="/ingredients">Ingredients</Link>
+          <Link to="/ordenes">Orders</Link>
+          <Link to="/encargos">Encargos</Link>
+          <Link to="/clientes">Customers</Link>
+          <Link to="/ingredientes">Ingredients</Link>
 
           {/* Apps */}
           <Link to="/kanban">Kanban</Link>
-          <Link to="/calendar">Calendar</Link>
+          <Link to="/calendario">Calendar</Link>
           <Link to="/editor">Editor</Link>
 
           {/* Gráficos */}
-          <Link to="/line">Line</Link>
+          <Link to="/linea">Line</Link>
           <Link to="/area">Area</Link>
           <Link to="/bar">Bar</Link>
-          <Link to="/pie">Pie</Link>
-          <Link to="/financial">Financial</Link>
-          <Link to="/colorMapping">Color Mapping</Link>
-          <Link to="/pyramid">Pyramid</Link>
-          <Link to="/stacked">Stacked</Link>
+          <Link to="/pizza">Pie</Link>
+          <Link to="/financiero">Financial</Link>
+          <Link to="/mapa-de-color">Color Mapping</Link>
+          <Link to="/piramide">Pyramid</Link>
+          <Link to="/apilado">Stacked</Link>
         </div>
         <Footer />
       </div>

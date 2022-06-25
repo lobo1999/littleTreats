@@ -17,7 +17,7 @@ import {
   Bar,
   Pie,
   Financial,
-  ColorMapping,
+  ColorMapping
 } from "./pages";
 
 export const App = () => {
@@ -28,19 +28,19 @@ export const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/adminDashboard" element={<AdminMainPage />} />
-          <Route path="/ecommerce" element={<Ecommerce />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/stacked" element={<Stacked />} />
-          <Route path="/pyramid" element={<Pyramid />} />
-          <Route path="/customers" element={<Customers />} />
+          <Route path="/comercio" element={<Ecommerce />} />
+          <Route path="/ordenes" element={<Orders />} />
+          <Route path="/calendario" element={<Calendar />} />
+          <Route path="/apilado" element={<Stacked />} />
+          <Route path="/piramide" element={<Pyramid />} />
+          <Route path="/clientes" element={<Customers />} />
           <Route path="/kanban" element={<Kanban />} />
-          <Route path="/line" element={<Line />} />
+          <Route path="/linea" element={<Line />} />
           <Route path="/area" element={<Area />} />
           <Route path="/bar" element={<Bar />} />
-          <Route path="/pie" element={<Pie />} />
-          <Route path="/financial" element={<Financial />} />
-          <Route path="/colorMapping" element={<ColorMapping />} />
+          <Route path="/pizza" element={<Pie />} />
+          <Route path="/financiero" element={<Financial />} />
+          <Route path="/mapa-de-color" element={<ColorMapping />} />
         </Routes>
       </Router>
     </div>

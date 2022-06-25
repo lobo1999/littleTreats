@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div>Soy el Header pero no me han desarrollado we, pinche gobierno culero</div>
   )
 }
 
