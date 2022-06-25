@@ -2,7 +2,23 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import "./App.css";
+import { Navbar, Footer, ThemeSettings, Sidebar } from "./";
+import {
+  Ecommerce,
+  Orders,
+  Calendar,
+  Stacked,
+  Pyramid,
+  Customers,
+  Kanban,
+  Line,
+  Area,
+  Bar,  
+  Pie,
+  index,
+  Financial,
+  ColorMapping,
+} from "../pages";
 
 export const AdminMainPage = () => {
   const activeMenu = true;
