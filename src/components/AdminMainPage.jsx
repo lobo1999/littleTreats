@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Navbar, Footer, ThemeSettings, Sidebar } from "./";
-
+import { useStateContext } from "../contexts/ContextProvider";
 
 export default function AdminMainPage() {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
 
   return (
     <div>
@@ -24,7 +24,7 @@ export default function AdminMainPage() {
         </div>
         {activeMenu ? (
           <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-            Sidebar
+            <Sidebar />
           </div>
         ) : (
           <div className="w-0 dark:bg-secondary-dark-bg">Sidebar w-0</div>
@@ -35,7 +35,7 @@ export default function AdminMainPage() {
           }`}
         >
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-            Navbar
+            <Navbar />
           </div>
         </div>
         <div>
@@ -62,6 +62,7 @@ export default function AdminMainPage() {
           <Link to="/pyramid">Pyramid</Link>
           <Link to="/stacked">Stacked</Link>
         </div>
+        <Footer />
       </div>
     </div>
   );
