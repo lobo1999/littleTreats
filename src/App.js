@@ -1,8 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AdminMainPage from "./components/AdminMainPage";
+import {
+  Ecommerce,
+  Orders,
+  Calendar,
+  Stacked,
+  Pyramid,
+  Customers,
+  Kanban,
+  Line,
+  Area,
+  Bar,
+  Pie,
+  Financial,
+  ColorMapping
+} from "./pages";
 
 export const App = () => {
   return (
@@ -11,6 +27,20 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/adminDashboard" element={<AdminMainPage />} />
+          <Route path="/comercio" element={<Ecommerce />} />
+          <Route path="/ordenes" element={<Orders />} />
+          <Route path="/calendario" element={<Calendar />} />
+          <Route path="/apilado" element={<Stacked />} />
+          <Route path="/piramide" element={<Pyramid />} />
+          <Route path="/clientes" element={<Customers />} />
+          <Route path="/kanban" element={<Kanban />} />
+          <Route path="/linea" element={<Line />} />
+          <Route path="/area" element={<Area />} />
+          <Route path="/bar" element={<Bar />} />
+          <Route path="/pizza" element={<Pie />} />
+          <Route path="/financiero" element={<Financial />} />
+          <Route path="/mapa-de-color" element={<ColorMapping />} />
         </Routes>
       </Router>
     </div>
