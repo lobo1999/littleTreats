@@ -1,8 +1,15 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({category, title}) => {
   return (
-    <div>Soy el Header pero no me han desarrollado we, pinche gobierno culero</div>
+    <div className="mb-10">
+      <p className="text-gray-400">
+        {category}
+      </p>
+      <p className="text-3xl font-extrabold tracking-tight text-slate-900">
+        {title}
+      </p>
+    </div>
   )
 }
 

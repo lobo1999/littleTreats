@@ -12,7 +12,7 @@ const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContext();
 
   /**
-  La constante handleCloseSideBar sirve para definir si el Sidebar va estar
+  La función handleCloseSideBar sirve para definir si el Sidebar va estar
   abierto o no automaticamente dependiendo del tamaño de la pantalla, llama
   a useStateContext de la clase ContextProvider
   */

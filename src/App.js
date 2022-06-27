@@ -29,7 +29,7 @@ export const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/adminDashboard" element={<AdminMainPage />} />
           <Route path="/comercio" element={<Ecommerce />} />
-          <Route path="/ordenes" element={<Orders />} />
+         
           <Route path="/calendario" element={<Calendar />} />
           <Route path="/apilado" element={<Stacked />} />
           <Route path="/piramide" element={<Pyramid />} />
