@@ -1,6 +1,36 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from 'axios';
+const serverURL = "https://localhost:44304/api/Users";
 function Register() {
+  
+
+const [data, setData] = useState([]);
+const[userSelection, setUserSelection]=useState({
+     name: '',
+     lastName: '',
+     phone: '',
+     email: '',
+     password: ''
+}) 
+
+const handleChange=e=>{
+  const {name, value}= e.target;
+  setUserSelection({
+    ...userSelection,
+    [name]: value
+  });
+  console.log(userSelection);
+}
+
+const peticionPost=async()=>{
+  await axios.post(serverURL, userSelection)
+  .then(response=>{
+    setData(data.concat(response.data));
+  }).catch(error=> {
+    console.log(error);
+  })
+}
+
   return (
     <div className="App bg-gray-900 h-screen w-screen relative overflow-hidden flex justify-center items-center">
       <div className="h-40-r w-40-r bg-gradient-to-r from-orange-400 to-amber-300 rounded-full absolute left-2/3 -top-56 transform rotate-160 animate-pulse"></div>
@@ -17,6 +47,8 @@ function Register() {
               type="text"
               placeholder="nombre"
               className="input-text float-right mx-3"
+              name="name"
+              onChange={handleChange}
             />
           </div>
           <div className="flow-root">
@@ -25,14 +57,8 @@ function Register() {
               type="text"
               placeholder="apellido"
               className="input-text float-right mx-3"
-            />
-          </div>
-          <div className="flow-root">
-            <h2 className="text-white float-left">Nombre de usuario</h2>
-            <input
-              type="text"
-              placeholder="nombre de usuario"
-              className="input-text float-right mx-3"
+              name="lastName"
+              onChange={handleChange}
             />
           </div>
           <div className="flow-root">
@@ -41,6 +67,8 @@ function Register() {
               type="text"
               placeholder="número de teléfono"
               className="input-text float-right mx-3"
+              name="phone"
+              onChange={handleChange}
             />
           </div>
           <div className="flow-root">
@@ -49,6 +77,8 @@ function Register() {
               type="text"
               placeholder="correo electrónico"
               className="input-text float-right mx-3"
+              name="email"
+              onChange={handleChange}
             />
           </div>
           <div className="flow-root">
@@ -57,6 +87,8 @@ function Register() {
               type="password"
               placeholder="contraseña"
               className="input-text float-right mx-3"
+              name="password"
+              onChange={handleChange}
             />
           </div>
           <div className="flow-root">
@@ -65,18 +97,24 @@ function Register() {
               type="password"
               placeholder="contraseña"
               className="input-text float-right mx-3"
+              onChange={handleChange}
+
             />
           </div>
 
-          <input
+          <button
             type="Submit"
             value="Registrarse"
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
-          />
+            onClick={()=>peticionPost()}
+           ></button>   
         </form>
       </div>
     </div>
   );
+
+ 
 }
 
 export default Register;
+
