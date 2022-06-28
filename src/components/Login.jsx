@@ -7,8 +7,10 @@ export default function Login() {
   const serverURL = "https://localhost:44304/api/Users";
 const [data, setData] = useState([]);
 const[userSelection, setUserSelection]=useState({
+     ID: 0,
      email: '',
-     password: ''
+     password: '',
+     role: ''
 }) 
 
 const handleChange=e=>{
@@ -17,30 +19,21 @@ const handleChange=e=>{
     ...userSelection,
     [name]: value
   });
-  
+  console.log(userSelection)
 }
 
 function peticionLogin(){
-  fetch(serverURL, {
-      method:'GET',
-      headers:{
-          'Accept':'application/json',
-          'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        email: userSelection.email,
-        password: userSelection.password
-      })
-  })
-  .then(res=>res.json())
-  .then((result)=>{
-      alert(result);
+fetch(`${serverURL}/${userSelection.email}/${userSelection.password}`)
+.then(res=>res.json())
+.then((result)=>{
+      setUserSelection(result)
   },(error)=>{
-      alert('Failed');
+      alert(error);
   })
+
+ alert(userSelection.role);
+
 }
-
-
 
 
 
@@ -58,11 +51,12 @@ function peticionLogin(){
           <div className="text-white font-poppins text-2xl tracking-widest">
             Inicio de Sesión
           </div>
-          <input type="text" placeholder="correo electrónico" className="input-text" onChange={handleChange}/>
+          <input type="text" placeholder="correo electrónico" className="input-text" name="email" onChange={handleChange}/>
           <input
             type="password"
             placeholder="contraseña"
             className="input-text"
+            name="password"
             onChange={handleChange}
           />
 
