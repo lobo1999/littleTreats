@@ -7,6 +7,7 @@ import AdminMainPage from "./components/AdminMainPage";
 import {
   Ecommerce,
   Orders,
+  Charges,
   Calendar,
   Stacked,
   Pyramid,
@@ -28,6 +29,7 @@ export const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/adminDashboard" element={<AdminMainPage />} />
+          <Route path="/encargos" element={<Charges />} />
           <Route path="/comercio" element={<Ecommerce />} />
           <Route path="/ordenes" element={<Orders />} />
           <Route path="/calendario" element={<Calendar />} />
