@@ -5,6 +5,11 @@
     @apply font-poppins bg-transparent border border-t-0 border-l-0 border-r-0 focus:outline-none text-white tracking-wide;
 }
 
+.invisible {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
 }

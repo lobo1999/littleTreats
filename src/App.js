@@ -31,7 +31,7 @@ export const App = () => {
           <Route path="/adminDashboard" element={<AdminMainPage />} />
           <Route path="/encargos" element={<Charges />} />
           <Route path="/comercio" element={<Ecommerce />} />
-          <Route path="/ordenes" element={<Orders />} />
+         
           <Route path="/calendario" element={<Calendar />} />
           <Route path="/apilado" element={<Stacked />} />
           <Route path="/piramide" element={<Pyramid />} />
