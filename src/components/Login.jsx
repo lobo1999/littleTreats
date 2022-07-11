@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Register from "./Register";
 
@@ -6,7 +6,7 @@ export default function Login() {
 
   const serverURL = "https://localhost:44304/api/Users";
 const [data, setData] = useState([]);
-const[userSelection, setUserSelection]=useState({
+const[userSelection_, setUserSelection_]=useState({
      ID: 0,
      email: '',
      password: '',
@@ -15,29 +15,29 @@ const[userSelection, setUserSelection]=useState({
 
 const handleChange=e=>{
   const {name, value}= e.target;
-  setUserSelection({
-    ...userSelection,
+  setUserSelection_({
+    ...userSelection_,
     [name]: value
   });
-  console.log(userSelection)
+  console.log(userSelection_)
 }
 
-function peticionLogin(){
-fetch(`${serverURL}/${userSelection.email}/${userSelection.password}`)
-.then(res=>res.json())
-.then((result)=>{
-      setUserSelection(result)
+function peticionGetData(){
+  fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`, {
+  })
+  .then(res=>res.json())
+  .then((result)=>{
+    if(result !== null) {
+      alert(result.email);
+    }else {
+      alert("La contraseña o el correo electronico están incorrectos");
+      console.log(result);
+    }
+      
   },(error)=>{
       alert(error);
   })
-
- alert(userSelection.role);
-
 }
-
-
-
-
 
 
 
@@ -63,12 +63,20 @@ fetch(`${serverURL}/${userSelection.email}/${userSelection.password}`)
           <Link to="/register" className="cursor-pointer text-white font-poppins text-1xl tracking-widest">
             Registrarme
           </Link>
+
+          <Link to="/adminDashboard">
           <input
             type="Submit"
             value="Iniciar Sesión"
+<<<<<<< HEAD
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-gray-200 hover:bg-gray-300 hover:bg-opacity-80 "
             onClick={()=>peticionLogin()}
+=======
+            className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
+            onClick={()=>peticionGetData()} 
+>>>>>>> 7f1a3c2a54594510be3284afcebc8f84e142c683
           />
+          </Link>
         </form>
       </div>
     </div>
