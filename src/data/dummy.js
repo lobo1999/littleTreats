@@ -906,7 +906,7 @@ export const ordersGrid = [
   },
   {
     field: "IdState",
-    headerText: "ID Estado",
+    headerText: "Estado de Orden",
     format: "C2",
     textAlign: "Center",
     editType: "numericedit",
@@ -914,7 +914,7 @@ export const ordersGrid = [
   },
   {
     field: "OrderID",
-    headerText: "ID Orden",
+    headerText: "Número de Orden",
     width: "120",
     textAlign: "Center",
   },
