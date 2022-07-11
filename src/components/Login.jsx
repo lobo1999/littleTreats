@@ -68,13 +68,8 @@ function peticionGetData(){
           <input
             type="Submit"
             value="Iniciar Sesión"
-<<<<<<< HEAD
-            className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-gray-200 hover:bg-gray-300 hover:bg-opacity-80 "
-            onClick={()=>peticionLogin()}
-=======
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
             onClick={()=>peticionGetData()} 
->>>>>>> 7f1a3c2a54594510be3284afcebc8f84e142c683
           />
           </Link>
         </form>
