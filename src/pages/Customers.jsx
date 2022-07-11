@@ -17,8 +17,9 @@ import { CustomersCRUD } from "./";
 import { useState } from "react";
 
 const Customers = () => {
+  const serverURL = "https://localhost:44304/api/Users";
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ["Delete"];
+  const toolbarOptions = ["Deshabilitar"];
   const editing = { allowDeleting: true, allowEditing: true };
   const targetEl = document.getElementById("defaultModal");
   {
@@ -30,6 +31,16 @@ const Customers = () => {
   const clicked = () => {
     setModalOn(true);
   };
+
+  function peticionGetData(){
+    fetch(serverURL)
+    .then(res=>res.json())
+    .then((result)=>{
+     return result;
+    },(error)=>{
+        alert(error);
+    })
+  }
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
