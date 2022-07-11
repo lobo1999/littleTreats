@@ -22,29 +22,23 @@ const handleChange=e=>{
   console.log(userSelection_)
 }
 
-function peticionLogin(){
-fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`)
-.then(res=>res.json())
-.then((result)=>{
-      setUserSelection_(result)
+function peticionGetData(){
+  fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`, {
+  })
+  .then(res=>res.json())
+  .then((result)=>{
+    if(result !== null) {
+      alert(result.email);
+    }else {
+      alert("La contraseña o el correo electronico están incorrectos");
+      console.log(result);
+    }
+      
   },(error)=>{
       alert(error);
   })
-
- alert(userSelection_.role);
-
 }
 
-async function peticionGET(){
- const response = await fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`);
- const rep = await response.json();
- if(rep === null) {
-    alert(rep);
- }
-
- this.setUserSelection_({ID:rep.id, email:rep.email, password:rep.password, role:rep.role});
- alert("hhhhhh") 
-}
 
 
   return (
@@ -69,12 +63,15 @@ async function peticionGET(){
           <Link to="/register" className="cursor-pointer text-white font-poppins text-1xl tracking-widest">
             Registrarme
           </Link>
+
+          <Link to="/adminDashboard">
           <input
             type="Submit"
             value="Iniciar Sesión"
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
-            onClick={()=>peticionGET()}
+            onClick={()=>peticionGetData()} 
           />
+          </Link>
         </form>
       </div>
     </div>
