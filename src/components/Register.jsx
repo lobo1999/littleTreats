@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -13,6 +13,11 @@ const[userSelection, setUserSelection]=useState({
      email: '',
      password: ''
 }) 
+
+const [formValues, setFormValues] = useState(setUserSelection);
+const [formErrors, setFormErrors] = useState({});
+const [isSubmit, setIsSubmit] = useState(false);
+
 
 const handleChange=e=>{
   const {name, value}= e.target;
@@ -46,12 +51,58 @@ function peticionPost(){
   })
 }
 
+
+useEffect(() => {
+  console.log(formErrors);
+  if (Object.keys(formErrors).length === 0 && isSubmit) {
+    console.log(formValues);
+  }
+}, [formErrors]);
+
+const validate = (values) => {
+  const errors = {};
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  if(!values.name) {
+    errors.username = "¡El nombre es necesario!";
+  }
+
+  if(!values.lastName){
+    errors.lastName = "¡El apellido es necesario!";
+  }
+
+  if (!values.phone) {
+    errors.phoneNumber = "¡El número de teléfono es necesario!";
+  }
+
+  if (!values.email) {
+    errors.email = "¡El correo electrónico es necesario!";
+  } else if (!regex.test(values.email)) {
+    errors.email = "¡Digite un correo aceptable!";
+  }
+
+  if (!values.password) {
+    errors.password = "¡La contraseña es necesaria!";
+  } else if (values.password.length < 4) {
+    errors.password = "¡La contraseña debe tener menos de 4 caracteres!";
+  } else if (values.password.length > 10) {
+    errors.password = "¡La contraseña no debe tener más de 10 caracteres!";
+  }
+  return errors;
+};
+
   return (
     <div className="App bg-gray-900 h-screen w-screen relative overflow-hidden flex justify-center items-center">
       <div className="h-40-r w-40-r bg-gradient-to-r from-orange-400 to-amber-300 rounded-full absolute left-2/3 -top-56 transform rotate-160 animate-pulse"></div>
       <div className="h-35-r w-35-r bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full absolute top-96 -left-20 transform rotate-180 animate-pulse"></div>
-
+      {Object.keys(formErrors).length === 0 && isSubmit ? (
+              <div className="ui message success">
+                ¡Cliente agregado exitosamente!
+              </div>
+            ) : (
+              <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+            )}
       <div className="container px-4 h-96 w-110 bg-white bg-opacity-10 rounded-2xl shadow-5xl relative z-2 border border-opacity-30 border-r-0 border-b-0 backdrop-filter backdrop-blur-sm">
+
       <form className="h-full flex flex-col justify-evenly items-center">
           <div className="text-white font-poppins text-2xl tracking-widest">
             Registro de Usuario
