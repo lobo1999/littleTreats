@@ -113,7 +113,6 @@ function peticionPost(){
               placeholder="contraseña"
               className="input-text float-right mx-3"
               onChange={handleChange}
-
             />
           </div>
           <Link to="/">
