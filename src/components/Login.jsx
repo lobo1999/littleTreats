@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Register from "./Register";
 
@@ -6,7 +6,7 @@ export default function Login() {
 
   const serverURL = "https://localhost:44304/api/Users";
 const [data, setData] = useState([]);
-const[userSelection, setUserSelection]=useState({
+const[userSelection_, setUserSelection_]=useState({
      ID: 0,
      email: '',
      password: '',
@@ -15,30 +15,36 @@ const[userSelection, setUserSelection]=useState({
 
 const handleChange=e=>{
   const {name, value}= e.target;
-  setUserSelection({
-    ...userSelection,
+  setUserSelection_({
+    ...userSelection_,
     [name]: value
   });
-  console.log(userSelection)
+  console.log(userSelection_)
 }
 
 function peticionLogin(){
-fetch(`${serverURL}/${userSelection.email}/${userSelection.password}`)
+fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`)
 .then(res=>res.json())
 .then((result)=>{
-      setUserSelection(result)
+      setUserSelection_(result)
   },(error)=>{
       alert(error);
   })
 
- alert(userSelection.role);
+ alert(userSelection_.role);
 
 }
 
+async function peticionGET(){
+ const response = await fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`);
+ const rep = await response.json();
+ if(rep === null) {
+    alert(rep);
+ }
 
-
-
-
+ this.setUserSelection_({ID:rep.id, email:rep.email, password:rep.password, role:rep.role});
+ alert("hhhhhh") 
+}
 
 
   return (
@@ -67,7 +73,7 @@ fetch(`${serverURL}/${userSelection.email}/${userSelection.password}`)
             type="Submit"
             value="Iniciar Sesión"
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
-            onClick={()=>peticionLogin()}
+            onClick={()=>peticionGET()}
           />
         </form>
       </div>
