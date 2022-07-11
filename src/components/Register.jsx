@@ -22,13 +22,20 @@ const handleChange=e=>{
   console.log(userSelection);
 }
 
-const peticionPost=async()=>{
-  await axios.post(serverURL, userSelection)
-  .then(response=>{
+function handleSubmit(e, data) {
+  alert("AAAA");
+}
+
+const peticionPost = async () => {
+  
+  await axios.post(serverURL, userSelection).then(response=>{
+    
     setData(data.concat(response.data));
-  }).catch(error=> {
-    console.log(error);
-  })
+
+  });
+
+  return data;
+
 }
 
   return (
@@ -37,7 +44,7 @@ const peticionPost=async()=>{
       <div className="h-35-r w-35-r bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full absolute top-96 -left-20 transform rotate-180 animate-pulse"></div>
 
       <div className="container px-4 h-96 w-110 bg-white bg-opacity-10 rounded-2xl shadow-5xl relative z-2 border border-opacity-30 border-r-0 border-b-0 backdrop-filter backdrop-blur-sm">
-        <form className="h-full flex flex-col justify-evenly items-center">
+        <form  onSubmit={handleSubmit} className="h-full flex flex-col justify-evenly items-center">
           <div className="text-white font-poppins text-2xl tracking-widest">
             Registro de Usuario
           </div>
@@ -98,16 +105,15 @@ const peticionPost=async()=>{
               placeholder="contraseña"
               className="input-text float-right mx-3"
               onChange={handleChange}
-
             />
           </div>
 
-          <button
+          <input
             type="Submit"
             value="Registrarse"
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
             onClick={()=>peticionPost()}
-           ></button>   
+           ></input>   
         </form>
       </div>
     </div>
