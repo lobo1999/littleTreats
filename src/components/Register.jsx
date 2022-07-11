@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import axios from 'axios';
-const serverURL = "https://localhost:44304/api/Users";
+import { Link } from "react-router-dom";
+
+
 function Register() {
   
-
+const serverURL = "https://localhost:44304/api/Users";
 const [data, setData] = useState([]);
 const[userSelection, setUserSelection]=useState({
-     name: '',
+     name: " ",
      lastName: '',
      phone: '',
      email: '',
@@ -19,23 +20,30 @@ const handleChange=e=>{
     ...userSelection,
     [name]: value
   });
-  console.log(userSelection);
-}
-
-function handleSubmit(e, data) {
-  alert("AAAA");
-}
-
-const peticionPost = async () => {
   
-  await axios.post(serverURL, userSelection).then(response=>{
-    
-    setData(data.concat(response.data));
+}
 
-  });
-
-  return data;
-
+function peticionPost(){
+  fetch(serverURL, {
+      method:'POST',
+      headers:{
+          'Accept':'application/json',
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        name: userSelection.name,
+        lastName: userSelection.lastName,
+        phone: userSelection.phone,
+        email: userSelection.email,
+        password: userSelection.password
+      })
+  })
+  .then(res=>res.json())
+  .then((result)=>{
+      alert(result);
+  },(error)=>{
+      alert('Failed');
+  })
 }
 
   return (
@@ -44,7 +52,7 @@ const peticionPost = async () => {
       <div className="h-35-r w-35-r bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full absolute top-96 -left-20 transform rotate-180 animate-pulse"></div>
 
       <div className="container px-4 h-96 w-110 bg-white bg-opacity-10 rounded-2xl shadow-5xl relative z-2 border border-opacity-30 border-r-0 border-b-0 backdrop-filter backdrop-blur-sm">
-        <form  onSubmit={handleSubmit} className="h-full flex flex-col justify-evenly items-center">
+      <form className="h-full flex flex-col justify-evenly items-center">
           <div className="text-white font-poppins text-2xl tracking-widest">
             Registro de Usuario
           </div>
@@ -107,13 +115,15 @@ const peticionPost = async () => {
               onChange={handleChange}
             />
           </div>
-
+          <Link to="/">
           <input
             type="Submit"
             value="Registrarse"
             className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
             onClick={()=>peticionPost()}
-           ></input>   
+           ></input>
+          </Link>
+          
         </form>
       </div>
     </div>
