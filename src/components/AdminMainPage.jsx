@@ -102,17 +102,14 @@ export default function AdminMainPage() {
         </div>
         <div>
           <button onClick={ clickEcommmerce }>Tablero principal</button>
-
           <button onClick={ clickOrders }>Orders</button>
           <button onClick={ clickBook }>Encargos</button>
           <button onClick={ clickCustomers }>Customers</button>
           <button onClick={ clickIngredients }>Ingredients</button>
-          
+
           <Link to="/kanban">Kanban</Link>
           <Link to="/calendario">Calendar</Link>
           <Link to="/editor">Editor</Link>
-
-          
           <Link to="/linea">Line</Link>
           <Link to="/area">Area</Link>
           <Link to="/bar">Bar</Link>
@@ -122,7 +119,7 @@ export default function AdminMainPage() {
           <Link to="/piramide">Pyramid</Link>
           <Link to="/apilado">Stacked</Link>
           <div className="relative bg-gray">
-            
+      
             
         </div>
         </div>
