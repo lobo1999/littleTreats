@@ -5,6 +5,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Navbar, Footer, ThemeSettings, Sidebar } from "./";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Customers, Orders, Ecommerce  } from "../pages";
+import { links } from "../data/dummy";
 
 export default function AdminMainPage() {
   const { activeMenu } = useStateContext();
@@ -13,48 +14,115 @@ export default function AdminMainPage() {
   const [ isBookActive, setBookActive] = useState(false);
   const [ isCustomersActive, setCustomersActive] = useState(false);
   const [ isIngredientsActive, setIngredientsActive] = useState(false);
+  const { activeSideBar, setActiveSideBar, screenSize } = useStateContext();
+  const activeLink =
+  "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
+  const normalLink =
+  "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
-  const clickEcommmerce = () => {
-    setEcommerceActive(true);
-    setOrdersActive(false);
-    setCustomersActive(false);
-    setIngredientsActive(false);
-    setBookActive(false);
-  }
+  const btnsCreator = () => {
+    
+    const clickEcommmerce = () => {
+      setEcommerceActive(true);
+      setOrdersActive(false);
+      setCustomersActive(false);
+      setIngredientsActive(false);
+      setBookActive(false);
+    }
+  
+    const clickOrders = () => {
+      setOrdersActive(true);
+      setCustomersActive(false);
+      setIngredientsActive(false);
+      setBookActive(false);
+      setEcommerceActive(false);
+    }
+  
+    const clickBook = () => {
+      setBookActive(true);
+      setCustomersActive(false);
+      setOrdersActive(false);
+      setIngredientsActive(false);
+      setEcommerceActive(false);
+    }
+    
+    const clickCustomers = () => {
+      setCustomersActive(true);
+      setOrdersActive(false);
+      setIngredientsActive(false);
+      setBookActive(false);
+      setEcommerceActive(false);
+    }
+  
+    const clickIngredients = () => {
+      setIngredientsActive(true);
+      setCustomersActive(false);
+      setOrdersActive(false);
+      setBookActive(false);
+      setEcommerceActive(false);
+    }
 
-  const clickOrders = () => {
-    setOrdersActive(true);
-    setCustomersActive(false);
-    setIngredientsActive(false);
-    setBookActive(false);
-    setEcommerceActive(false);
-  }
+    const btnHandler = (element, handlerEvent) => {
+      return <button
+      key={element.name}
+      onClick={handlerEvent}
+      className={`flex justify-items-center px-2 py-3 mb-1 rounded-2xl ${({ isActive }) =>
+      isActive ? activeLink : normalLink}
+      hover:bg-gray-200`}
+    >
+      {element.icon}
+      <span className="capitalize font-semibold ml-2 border-solid">{element.name}</span>
+    </button>;
+    }
+    var handler;
 
-  const clickBook = () => {
-    setBookActive(true);
-    setCustomersActive(false);
-    setOrdersActive(false);
-    setIngredientsActive(false);
-    setEcommerceActive(false);
+       return links.map((item) => (
+        <div key={item.title}>
+          <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
+          {item.links.map((link) => {
+            if(link.name === "ordenes"){
+              handler = clickOrders;
+              return btnHandler(link, handler);
+            }else if(link.name === "encargos"){
+              handler = clickBook;
+              return btnHandler(link, handler);
+            }else if(link.name === "clientes"){
+              handler = clickCustomers;
+              return btnHandler(link, handler);
+            }else if(link.name === "comercio"){
+              handler = clickEcommmerce;
+              return btnHandler(link, handler);
+            }else if(link.name === "ingredientes"){
+              return btnHandler(link, handler);
+            }else if(link.name === "kanban"){
+              return btnHandler(link, handler);
+            }else if(link.name === "calendario"){
+              return btnHandler(link, handler);
+            }else if(link.name === "linea"){
+              return btnHandler(link, handler);
+            }else if(link.name === "area") {
+              return btnHandler(link, handler);
+            }else if(link.name === "barras"){
+              return btnHandler(link, handler);
+            }else if(link.name === "pizza"){
+              return btnHandler(link, handler);
+            }else if(link.name === "financiero"){
+              return btnHandler(link, handler);
+            }else if(link.name === "mapa-de-color"){
+              return btnHandler(link, handler);
+            }else if(link.name === "piramide"){
+              return btnHandler(link, handler);
+            }else if(link.name === "editor"){
+              return btnHandler(link, handler);
+            }else if(link.name === "apilado"){
+              return btnHandler(link, handler);
+            }
+          })}
+        </div>
+      ))
   }
   
-  const clickCustomers = () => {
-    setCustomersActive(true);
-    setOrdersActive(false);
-    setIngredientsActive(false);
-    setBookActive(false);
-    setEcommerceActive(false);
-  }
-
-  const clickIngredients = () => {
-    setIngredientsActive(true);
-    setCustomersActive(false);
-    setOrdersActive(false);
-    setBookActive(false);
-    setEcommerceActive(false);
-  }
-
-
+  
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg">
@@ -71,7 +139,7 @@ export default function AdminMainPage() {
         </div>
         {activeMenu ? (
           <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-            <Sidebar />
+            <Sidebar btns={btnsCreator()} />
           </div>
         ) : (
           <div className="w-0 dark:bg-secondary-dark-bg">Sidebar w-0</div>
@@ -100,33 +168,6 @@ export default function AdminMainPage() {
             }
           </div>
         </div>
-        <div>
-          <button onClick={ clickEcommmerce }>Tablero principal</button>
-
-          <button onClick={ clickOrders }>Orders</button>
-          <button onClick={ clickBook }>Encargos</button>
-          <button onClick={ clickCustomers }>Customers</button>
-          <button onClick={ clickIngredients }>Ingredients</button>
-          
-          <Link to="/kanban">Kanban</Link>
-          <Link to="/calendario">Calendar</Link>
-          <Link to="/editor">Editor</Link>
-
-          
-          <Link to="/linea">Line</Link>
-          <Link to="/area">Area</Link>
-          <Link to="/bar">Bar</Link>
-          <Link to="/pizza">Pie</Link>
-          <Link to="/financiero">Financial</Link>
-          <Link to="/mapa-de-color">Color Mapping</Link>
-          <Link to="/piramide">Pyramid</Link>
-          <Link to="/apilado">Stacked</Link>
-          <div className="relative bg-gray">
-            
-            
-        </div>
-        </div>
-        
         <Footer />
       </div>
     </div>
