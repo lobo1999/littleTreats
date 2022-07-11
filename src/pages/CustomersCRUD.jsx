@@ -1,12 +1,25 @@
-import React from "react";
+import React  from "react";
 import { useState, useEffect } from "react";
 
 function CustomersCRUD({ setModalOn, setChoice }) {
+  const serverURL = "https://localhost:44304/api/Users";
+const [data, setData] = useState([]);
+const[userSelection, setUserSelection]=useState({
+     name: "",
+     lastName: '',
+     phone: '',
+     email: '',
+     password: ''
+}); 
+
   const handleOKClick = () => {
+    peticionPost();
     setChoice(true);
     setModalOn(false);
+
   };
   const handleCancelClick = () => {
+
     setChoice(false);
     setModalOn(false);
   };
@@ -23,6 +36,7 @@ function CustomersCRUD({ setModalOn, setChoice }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+  
   };
 
   const handleSubmit = (e) => {
@@ -63,6 +77,38 @@ function CustomersCRUD({ setModalOn, setChoice }) {
     }
     return errors;
   };
+
+  const handleChange_=e=>{
+    const {name, value}= e.target;
+    setUserSelection({
+      ...userSelection,
+      [name]: value
+    });
+    
+  }
+
+  function peticionPost(){
+    fetch(serverURL, {
+        method:'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          name: formValues.nombre,
+          lastName: formValues.apellido,
+          phone: formValues.teléfono,
+          email: formValues.correo,
+          password: ""
+        })
+    })
+    .then(res=>res.json())
+    .then((result)=>{
+        alert(result);
+    },(error)=>{
+        alert(error);
+    })
+  }
 
   return (
     <div className="bg-zinc-200 opacity-90 fixed inset-0 z-50   ">
@@ -132,6 +178,7 @@ function CustomersCRUD({ setModalOn, setChoice }) {
             <button
               onClick={handleOKClick}
               className="rounded px-4 py-2 text-white  bg-green-400 "
+               
             >
               Agregar
             </button>
