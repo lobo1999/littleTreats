@@ -17,4 +17,7 @@ export { default as ChargesCRUD } from './ChargesCRUD';
 export { default as CustomersCRUD } from './CustomersCRUD';
 export { default as Ingredients } from './Ingredients';
 export { default as IngredientsCRUD } from './IngredientsCRUD';
+export { default as ProductsCRUD } from './ProductsCRUD';
+export { default as Products } from './Products';
+
 

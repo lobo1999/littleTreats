@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Navbar, Footer, ThemeSettings, Sidebar } from "./";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Customers, Orders, Ecommerce, Ingredients, Charges  } from "../pages";
+import { Customers, Orders, Ecommerce, Ingredients, Charges, Products } from "../pages";
 import { links } from "../data/dummy";
 
 export default function AdminMainPage() {
@@ -14,6 +14,7 @@ export default function AdminMainPage() {
   const [ isBookActive, setBookActive] = useState(false);
   const [ isCustomersActive, setCustomersActive] = useState(false);
   const [ isChargesActive, setChargesActive] = useState(false);
+  const [ isProductsActive, setProductsActive] = useState(false);
   const [ isIngredientsActive, setIngredientsActive] = useState(false);
   const { activeSideBar, setActiveSideBar, screenSize } = useStateContext();
   const activeLink =
@@ -30,6 +31,7 @@ export default function AdminMainPage() {
       setIngredientsActive(false);
       setBookActive(false);
       setChargesActive(false);
+      setProductsActive(false);
     }
   
     const clickOrders = () => {
@@ -39,6 +41,7 @@ export default function AdminMainPage() {
       setBookActive(false);
       setEcommerceActive(false);
       setChargesActive(false);
+      setProductsActive(false);
     }
   
     const clickBook = () => {
@@ -48,6 +51,7 @@ export default function AdminMainPage() {
       setIngredientsActive(false);
       setChargesActive(false);
       setEcommerceActive(false);
+      setProductsActive(false);
     }
     
     const clickCustomers = () => {
@@ -57,6 +61,7 @@ export default function AdminMainPage() {
       setBookActive(false);
       setEcommerceActive(false);
       setChargesActive(false);
+      setProductsActive(false);
     }
   
     const clickIngredients = () => {
@@ -66,10 +71,22 @@ export default function AdminMainPage() {
       setBookActive(false);
       setEcommerceActive(false);
       setChargesActive(false);
+      setProductsActive(false);
     }
 
     const clickCharges = () => {
       setChargesActive(true);
+      setIngredientsActive(false);
+      setCustomersActive(false);
+      setOrdersActive(false);
+      setBookActive(false);
+      setEcommerceActive(false);
+      setProductsActive(false);
+    }
+
+    const clickProducts = () => {
+      setProductsActive(true);
+      setChargesActive(false);
       setIngredientsActive(false);
       setCustomersActive(false);
       setOrdersActive(false);
@@ -109,6 +126,9 @@ export default function AdminMainPage() {
               return btnHandler(link, handler);
             }else if(link.name === "ingredientes"){
               handler = clickIngredients;
+              return btnHandler(link, handler);
+            }else if(link.name === "productos"){
+              handler = clickProducts;
               return btnHandler(link, handler);
             }else if(link.name === "kanban"){
               return btnHandler(link, handler);
@@ -189,6 +209,10 @@ export default function AdminMainPage() {
             {
               isChargesActive ? 
               <Charges/> : null
+            }
+            {
+              isProductsActive ? 
+              <Products/> : null
             }
           </div>
         </div>

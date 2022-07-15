@@ -15,6 +15,7 @@ import { customersData, customersGrid } from "../data/dummy";
 import { Header } from "../components";
 import { CustomersCRUD } from "./";
 import { useState } from "react";
+import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 
 const Customers = () => {
   const selectionsettings = { persistSelection: true };
@@ -26,6 +27,9 @@ const Customers = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const modifyOption = () =>{
+    <ButtonComponent>Modificar</ButtonComponent>
+  }
 
   const clicked = () => {
     setModalOn(true);
@@ -74,6 +78,7 @@ const Customers = () => {
           {customersGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
+            <ColumnDirective headerText='Opciones'/>
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
       </GridComponent>

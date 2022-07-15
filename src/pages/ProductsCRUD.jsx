@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function CustomersCRUD({ setModalOn, setChoice }) {
+function ProductsCRUD({ setModalOn, setChoice }) {
   const serverURL = "https://localhost:44304/api/Users";
   const [data, setData] = useState([]);
   const [userSelection, setUserSelection] = useState({
@@ -211,4 +211,4 @@ function CustomersCRUD({ setModalOn, setChoice }) {
   );
 }
 
-export default CustomersCRUD;
+export default ProductsCRUD;

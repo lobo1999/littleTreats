@@ -11,12 +11,13 @@ import {
   Sort,
   Filter,
 } from "@syncfusion/ej2-react-grids";
-import { ordersData, ordersGrid } from "../data/dummy";
+import { customersData, customersGrid } from "../data/dummy";
 import { Header } from "../components";
-import { OrdersCRUD } from "./";
+import { ProductsCRUD } from "./";
 import { useState } from "react";
+import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 
-const Orders = () => {
+const Products = () => {
   const selectionsettings = { persistSelection: true };
   const toolbarOptions = ["Borrar"];
   const editing = { allowDeleting: true, allowEditing: true };
@@ -26,13 +27,17 @@ const Orders = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const modifyOption = () =>{
+    <ButtonComponent>Modificar</ButtonComponent>
+  }
+
   const clicked = () => {
     setModalOn(true);
   };
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header title="Órdenes" />   
+      <Header title="Productos" />
       <div className="top-left">
         <div>
           <div className="flex justify-center">
@@ -40,7 +45,7 @@ const Orders = () => {
               className="flex  cursor-pointer justify-center w-1/3  bg-blue-400 p-4  m-6 rounded-md text-white"
               onClick={clicked}
             >
-              Agregar Orden
+              Agregar Producto
             </div>
           </div>
 
@@ -49,18 +54,18 @@ const Orders = () => {
             <div className="flex justify-center">
               <div className="flex  justify-center w-1/3 bg-red-400 m-4 p-6 text-lg text-white ">
                 {" "}
-                Orden agregada
+                Producto agregado
               </div>
             </div>
           )}
 
           {modalOn && (
-            <OrdersCRUD setModalOn={setModalOn} setChoice={setChoice} />
+            <ProductsCRUD setModalOn={setModalOn} setChoice={setChoice} />
           )}
         </div>
       </div>
       <GridComponent
-        dataSource={ordersData}
+        dataSource={customersData}
         enableHover={false}
         allowPaging
         pageSettings={{ pageCount: 5 }}
@@ -70,9 +75,10 @@ const Orders = () => {
         allowSorting
       >
         <ColumnsDirective>
-          {ordersGrid.map((item, index) => (
+          {customersGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
+            <ColumnDirective headerText='Opciones'/>
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
       </GridComponent>
@@ -80,4 +86,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Products;
