@@ -462,6 +462,40 @@ export const customersGrid = [
   },
 ];
 
+export const ingredientsGrid = [
+  { type: "checkbox", width: "50" },
+  {
+    field: "Name",
+    headerText: "Nombre",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "UnitofMeasurement",
+    headerText: "Unidad de Medida",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "Amount",
+    headerText: "Cantidad",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "Price",
+    headerText: "Precio",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "Brand",
+    headerText: "Marca",
+    width: "150",
+    textAlign: "Center",
+  },
+];
+
 export const employeesGrid = [
   {
     headerText: "Employee",
@@ -891,6 +925,7 @@ export const userProfileData = [
 ];
 
 export const ordersGrid = [
+  { type: "checkbox", width: "50" },
   {
     field: "DateOfRealization",
     headerText: "Fecha de Pedido",
@@ -953,6 +988,35 @@ export const customersData = [
     Phone: "83244353",
     UserName: "chulo01",
   },
+];
+
+export const ingredientsData = [
+  {
+    Name: "Salsa Worcester",
+    UnitofMeasurement: "1 litro",
+    Amount: "2",
+    Price: "2800",
+    Brand: "Lizano",
+  },{
+    Name: "Sal",
+    UnitofMeasurement: "400 gramos",
+    Amount: "5",
+    Price: "500",
+    Brand: "Sal Sol",
+  },{
+    Name: "Harina",
+    UnitofMeasurement: "2 kilos",
+    Amount: "6",
+    Price: "900",
+    Brand: "Nacarina",
+  },{
+    Name: "Esencia de Vainilla",
+    UnitofMeasurement: "500 ml",
+    Amount: "3",
+    Price: "1900",
+    Brand: "Vainol",
+  },
+
 ];
 
 export const employeesData = [
@@ -1562,9 +1626,10 @@ export const chargesData =  [
 ];
 
 export const chargesGrid =  [
+  { type: "checkbox", width: "50" },
   {
     field: "ChargeID",
-    headerText: "ID Encargo",
+    headerText: "Encargo",
     width: "150",
     editType: "dropdownedit",
     textAlign: "Center",
@@ -1572,7 +1637,7 @@ export const chargesGrid =  [
   {
     field: "Deadline",
     headerText: "Plazo máximo de entrega",
-    width: "150",
+    width: "200",
     textAlign: "Center",
   },
   {
@@ -1586,18 +1651,18 @@ export const chargesGrid =  [
   {
     field: "ShippingMethod",
     headerText: "Método de entrega",
-    width: "120",
+    width: "160",
     textAlign: "Center",
   },
   {
     field: "IdClient",
-    headerText: "ID Cliente",
+    headerText: "Cliente",
     width: "120",
     textAlign: "Center",
   },
   {
     field: "IdOrder",
-    headerText: "ID Orden",
+    headerText: "Orden",
     width: "120",
     textAlign: "Center",
   },
