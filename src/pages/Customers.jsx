@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   GridComponent,
   ColumnsDirective,
@@ -27,20 +27,19 @@ const Customers = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [data, setData] = useState([]);
+
 
   const clicked = () => {
     setModalOn(true);
   };
 
-  function peticionGetData(){
+  useEffect(() => {
     fetch(serverURL)
     .then(res=>res.json())
-    .then((result)=>{
-     return result;
-    },(error)=>{
-        alert(error);
-    })
-  }
+    .then( data => {setData(data)});
+  })
+
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -72,7 +71,7 @@ const Customers = () => {
         </div>
       </div>
       <GridComponent
-        dataSource={customersData}
+        dataSource={data}
         enableHover={false}
         allowPaging
         pageSettings={{ pageCount: 5 }}
