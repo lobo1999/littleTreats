@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   GridComponent,
   ColumnsDirective,
@@ -18,6 +18,7 @@ import { useState } from "react";
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 
 const Customers = () => {
+  const serverURL = "https://localhost:44304/api/Users";
   const selectionsettings = { persistSelection: true };
   const toolbarOptions = ["Borrar"];
   const editing = { allowDeleting: true, allowEditing: true };
@@ -27,13 +28,25 @@ const Customers = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+<<<<<<< HEAD
   const modifyOption = () =>{
     <ButtonComponent>Modificar</ButtonComponent>
   }
+=======
+  const [data, setData] = useState([]);
+
+>>>>>>> 28887df9f0f234630e6d4c1bd92b1d9d99ddda3f
 
   const clicked = () => {
     setModalOn(true);
   };
+
+  useEffect(() => {
+    fetch(serverURL)
+    .then(res=>res.json())
+    .then( data => {setData(data)});
+  })
+
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -65,7 +78,7 @@ const Customers = () => {
         </div>
       </div>
       <GridComponent
-        dataSource={customersData}
+        dataSource={data}
         enableHover={false}
         allowPaging
         pageSettings={{ pageCount: 5 }}
