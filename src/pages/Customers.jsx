@@ -28,14 +28,7 @@ const Customers = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
-<<<<<<< HEAD
-  const modifyOption = () =>{
-    <ButtonComponent>Modificar</ButtonComponent>
-  }
-=======
   const [data, setData] = useState([]);
-
->>>>>>> 28887df9f0f234630e6d4c1bd92b1d9d99ddda3f
 
   const clicked = () => {
     setModalOn(true);
