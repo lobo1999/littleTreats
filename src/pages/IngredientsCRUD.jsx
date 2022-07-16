@@ -125,33 +125,41 @@ function CustomersCRUD({ setModalOn, setChoice }) {
         <div className="flex-col justify-center bg-white py-12 px-24 border-4 border-sky-500 rounded-xl ">
           <div>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>
-              <h1 className="px-8 text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
+              <h1 className="px-8 text-gray-500 font-bold mx-auto md:text-right mb-1 md:mb-4 pr-4">
                 Formulario Ingreso de Ingrediente
               </h1>
               <div className="md:items-center mb-6">
-                <div className="inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <label className="inline">Nombre</label>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="text"
                     name="nombre"
-                    placeholder="Nombre"
                     value={formValues.username}
                     onChange={handleChange}
                   />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Nombre
+                  </label>
                 </div>
                 <p>{formErrors.username}</p>
-                <div className="inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <label>Unidad de Medida</label>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="list"
                     list="units"
                     name="unidaddemedida"
-                    placeholder="Unidad de Medida"
                     value={formValues.lastname}
                     onChange={handleChange}
                   />
+                  <label
+                    for="floating_filled"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Unidad de Medida
+                  </label>
                   <datalist id="units">
                     <option>Kg kilogramos</option>
                     <option>G gramos</option>
@@ -162,42 +170,54 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                   </datalist>
                 </div>
                 <p>{formErrors.username}</p>
-                <div className="inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <label>Cantidad</label>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="number"
                     min="0"
                     name="cantidad"
-                    placeholder="1"
                     value={formValues.phoneNumber}
                     onChange={handleChange}
                   />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Cantidad
+                  </label>
                 </div>
                 <p>{formErrors.username}</p>
-                <div className="inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <label>Precio</label>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="number"
                     min="100"
                     name="precio"
-                    placeholder="100"
                     value={formValues.email}
                     onChange={handleChange}
                   />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Precio
+                  </label>
                 </div>
                 <p>{formErrors.email}</p>
-                <div className="inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <label>Marca</label>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="text"
                     name="marca"
-                    placeholder="marca"
                     value={formValues.email}
                     onChange={handleChange}
                   />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Marca
+                  </label>
                 </div>
                 <p>{formErrors.email}</p>
               </div>
