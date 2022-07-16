@@ -164,7 +164,8 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="text"
+                    type="list"
+                    list="states"
                     name="estado"
                     value={formValues.phoneNumber}
                     onChange={handleChange}
@@ -175,6 +176,11 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                   >
                     Estado de Orden
                   </label>
+                  <datalist id="states">
+                    <option>En proceso</option>
+                    <option>Entregado</option>
+                    <option>Cancelado</option>
+                  </datalist>
                 </div>
                 <p>{formErrors.username}</p>
               </div>
