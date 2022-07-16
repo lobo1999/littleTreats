@@ -24,7 +24,8 @@ import {
   BsChatLeft,
 } from "react-icons/bs";
 import {
-  MdOutlineFoodBank
+  MdOutlineFoodBank,
+  MdRestaurantMenu
 } from "react-icons/md";
 import {
   GrDeliver
@@ -550,6 +551,10 @@ export const links = [
       {
         name: "clientes",
         icon: <RiContactsLine />,
+      },
+      {
+        name: "productos",
+        icon: <MdRestaurantMenu/>,
       },
       {
         name: "ingredientes",
