@@ -451,31 +451,31 @@ export const customersGrid = [
 export const ingredientsGrid = [
   { type: "checkbox", width: "50" },
   {
-    field: "Name",
+    field: "name",
     headerText: "Nombre",
     width: "150",
     textAlign: "Center",
   },
   {
-    field: "UnitofMeasurement",
+    field: "unit",
     headerText: "Unidad de Medida",
     width: "150",
     textAlign: "Center",
   },
   {
-    field: "Amount",
+    field: "amount",
     headerText: "Cantidad",
     width: "150",
     textAlign: "Center",
   },
   {
-    field: "Price",
+    field: "price",
     headerText: "Precio",
     width: "150",
     textAlign: "Center",
   },
   {
-    field: "Brand",
+    field: "brand",
     headerText: "Marca",
     width: "150",
     textAlign: "Center",
