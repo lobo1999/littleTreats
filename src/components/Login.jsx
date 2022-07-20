@@ -5,6 +5,7 @@ import Register from "./Register";
 export default function Login() {
 
 const serverURL = "https://localhost:44304/api/Users";
+let prueba; 
 const [data, setData] = useState([]);
 const[userSelection_, setUserSelection_]=useState({
      ID: 0,
@@ -29,15 +30,18 @@ function peticionGetData(){
   .then((result)=>{
     if(result !== null) {
       alert(result.email);
+      prueba = true; 
     }else {
       alert("La contraseña o el correo electronico están incorrectos");
       console.log(result);
+      prueba = false;
     }
       
   },(error)=>{
       alert(error);
   })
 }
+
 
 
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function CustomersCRUD({ setModalOn, setChoice }) {
-  const serverURL = "https://localhost:44304/api/Users";
+function IngredientsCRUD({ setModalOn, setChoice }) {
+  const serverURL = "https://localhost:44304/api/Inventory";
   const [data, setData] = useState([]);
 
   /**Para cuestiones de API dentro de de; userSelection los campos serían:
@@ -12,13 +12,6 @@ function CustomersCRUD({ setModalOn, setChoice }) {
   price: "",
   brand: "",
   */
-  const [userSelection, setUserSelection] = useState({
-    name: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
 
   const handleOKClick = () => {
     peticionPost();
@@ -61,37 +54,25 @@ function CustomersCRUD({ setModalOn, setChoice }) {
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.username) {
-      errors.username = "¡El nombre es necesario!";
+    if (!values.nombre) {
+      errors.nombre = "¡El nombre del ingrediente es necesario!";
     }
-    if (!values.lastname) {
-      errors.lastname = "¡El apellido es necesario!";
+    if (!values.unidaddemedida) {
+      errors.unidaddemedida = "¡La unidad de medida es necesario!";
     }
-    if (!values.phoneNumber) {
-      errors.phoneNumber = "¡El número de teléfono es necesario!";
+    if (!values.cantidad) {
+      errors.cantidad = "¡El número de teléfono es necesario!";
     }
-    if (!values.email) {
-      errors.email = "¡El correo electrónico es necesario!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "¡Digite un correo aceptable!";
+    if (!values.precio) {
+      errors.precio = "¡El precio es necesario!";
     }
-    if (!values.password) {
-      errors.password = "¡La contraseña es necesaria!";
-    } else if (values.password.length < 4) {
-      errors.password = "¡La contraseña debe tener menos de 4 caracteres!";
-    } else if (values.password.length > 10) {
-      errors.password = "¡La contraseña no debe tener más de 10 caracteres!";
-    }
+
+    if (!values.marca) {
+      errors.marca = "¡La marca es necesaria!";
+    } 
     return errors;
   };
 
-  const handleChange_ = (e) => {
-    const { name, value } = e.target;
-    setUserSelection({
-      ...userSelection,
-      [name]: value,
-    });
-  };
 
   function peticionPost() {
     fetch(serverURL, {
@@ -102,10 +83,10 @@ function CustomersCRUD({ setModalOn, setChoice }) {
       },
       body: JSON.stringify({
         name: formValues.nombre,
-        lastName: formValues.apellido,
-        phone: formValues.teléfono,
-        email: formValues.correo,
-        password: "",
+        unit: formValues.unidaddemedida,
+        quantity: formValues.cantidad,
+        price: formValues.precio,
+        brand: formValues.marca,
       }),
     })
       .then((res) => res.json())
@@ -134,7 +115,7 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="text"
                     name="nombre"
-                    value={formValues.username}
+                    value={formValues.nombre}
                     onChange={handleChange}
                   />
                   <label
@@ -144,14 +125,14 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     Nombre
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.nombre}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="list"
                     list="units"
                     name="unidaddemedida"
-                    value={formValues.lastname}
+                    value={formValues.unidaddemedida}
                     onChange={handleChange}
                   />
                   <label
@@ -161,22 +142,22 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     Unidad de Medida
                   </label>
                   <datalist id="units">
-                    <option>Kg kilogramos</option>
-                    <option>G gramos</option>
-                    <option>Oz onzas</option>
-                    <option>Gal galones</option>
-                    <option>Lt litros</option>
-                    <option>ml Mililitros</option>
-                  </datalist>
+                    <option value="Kg">Kg</option>
+                    <option>G</option>
+                    <option>Oz</option>
+                    <option>Gal</option>
+                    <option>Lt</option>
+                    <option>ml</option>
+                  </datalist >
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.unidaddemedida}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="number"
                     min="0"
                     name="cantidad"
-                    value={formValues.phoneNumber}
+                    value={formValues.cantidad}
                     onChange={handleChange}
                   />
                   <label
@@ -186,14 +167,14 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     Cantidad
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.cantidad}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="number"
                     min="100"
                     name="precio"
-                    value={formValues.email}
+                    value={formValues.precio}
                     onChange={handleChange}
                   />
                   <label
@@ -203,14 +184,15 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     Precio
                   </label>
                 </div>
-                <p>{formErrors.email}</p>
+                <p>{formErrors.precio}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="text"
                     name="marca"
-                    value={formValues.email}
+                    value={formValues.marca}
                     onChange={handleChange}
+
                   />
                   <label
                     for="floating_filled"
@@ -219,7 +201,7 @@ function CustomersCRUD({ setModalOn, setChoice }) {
                     Marca
                   </label>
                 </div>
-                <p>{formErrors.email}</p>
+                <p>{formErrors.marca}</p>
               </div>
             </form>
           </div>
@@ -243,4 +225,4 @@ function CustomersCRUD({ setModalOn, setChoice }) {
   );
 }
 
-export default CustomersCRUD;
+export default IngredientsCRUD;
