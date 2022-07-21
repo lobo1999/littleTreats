@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function ProductsCRUD({ setModalOn, setChoice }) {
-  const serverURL = "https://localhost:44304/api/Users";
+  const serverURL = "https://localhost:44304/api/Product";
   const [data, setData] = useState([]);
 
   const handleOKClick = () => {
@@ -16,9 +16,10 @@ function ProductsCRUD({ setModalOn, setChoice }) {
   };
   const initialValues = {
     nombre: "",
-    apellido: "",
-    teléfono: "",
-    correo: "",
+    precio: "",
+    cantidad: "",
+    descripcion: "",
+    descuento: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -45,27 +46,22 @@ function ProductsCRUD({ setModalOn, setChoice }) {
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.username) {
-      errors.username = "¡El nombre es necesario!";
+    if (!values.nombre) {
+      errors.nombre = "¡El nombre es necesario!";
     }
-    if (!values.lastname) {
-      errors.lastname = "¡El apellido es necesario!";
+    if (!values.descripcion) {
+      errors.descripcion = "¡El apellido es necesario!";
     }
-    if (!values.phoneNumber) {
-      errors.phoneNumber = "¡El número de teléfono es necesario!";
+    if (!values.precio) {
+      errors.precio = "¡El número de teléfono es necesario!";
     }
-    if (!values.email) {
-      errors.email = "¡El correo electrónico es necesario!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "¡Digite un correo aceptable!";
+    if (!values.cantidad) {
+      errors.cantidad = "¡El correo electrónico es necesario!";
+    } 
+    if (!values.descuento) {
+      errors.descuento = "¡La contraseña es necesaria!";
     }
-    if (!values.password) {
-      errors.password = "¡La contraseña es necesaria!";
-    } else if (values.password.length < 4) {
-      errors.password = "¡La contraseña debe tener menos de 4 caracteres!";
-    } else if (values.password.length > 10) {
-      errors.password = "¡La contraseña no debe tener más de 10 caracteres!";
-    }
+
     return errors;
   };
 
@@ -80,10 +76,10 @@ function ProductsCRUD({ setModalOn, setChoice }) {
       },
       body: JSON.stringify({
         name: formValues.nombre,
-        lastName: formValues.apellido,
-        phone: formValues.teléfono,
-        email: formValues.correo,
-        password: "",
+        quantity: formValues.cantidad,
+        price: formValues.precio,
+        description: formValues.descripcion,
+        discount: formValues.descuento,
       }),
     })
       .then((res) => res.json())
@@ -104,7 +100,7 @@ function ProductsCRUD({ setModalOn, setChoice }) {
           <div>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>
               <h1 className="px-8 text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                Formulario Ingreso de Cliente
+                Formulario ingreso del producto
               </h1>
               <div className="md:items-center mb-6">
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
@@ -113,7 +109,7 @@ function ProductsCRUD({ setModalOn, setChoice }) {
                     type="text"
                     id="floating_filled" 
                     name="nombre"
-                    value={formValues.username}
+                    value={formValues.nombre}
                     onChange={handleChange}
                   />
                   <label
@@ -123,58 +119,75 @@ function ProductsCRUD({ setModalOn, setChoice }) {
                     Nombre
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.nombre}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="text"
                     id="floating_filled2" 
-                    name="apellido"
-                    value={formValues.lastname}
+                    name="descripcion"
+                    value={formValues.descripcion}
                     onChange={handleChange}
                   />
                   <label
                     for="floating_filled2"
                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
-                    Apellido
+                    Descripción 
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.descripcion}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="number"
                     id="floating_filled" 
-                    name="teléfono"
-                    value={formValues.phoneNumber}
+                    name="precio"
+                    value={formValues.precio}
                     onChange={handleChange}
                   />
                   <label
                     for="floating_filled"
                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
-                    Teléfono
+                    Precio
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.precio}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="text"
+                    type="number"
                     id="floating_filled" 
-                    name="correo"
-                    value={formValues.email}
+                    name="cantidad"
+                    value={formValues.cantidad}
                     onChange={handleChange}
                   />
                   <label
                     for="floating_filled"
                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
-                    Correo Electrónico
+                   Cantidad
                   </label>
                 </div>
-                <p>{formErrors.email}</p>
+                <p>{formErrors.cantidad}</p>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
+                  <input
+                    className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    type="number"
+                    id="floating_filled" 
+                    name="descuento"
+                    value={formValues.descuento}
+                    onChange={handleChange}
+                  />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                   Descuento
+                  </label>
+                </div>
+                <p>{formErrors.descuento}</p>
               </div>
             </form>
           </div>
