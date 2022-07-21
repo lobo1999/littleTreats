@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 function IngredientsCRUD({ setModalOn, setChoice }) {
   const serverURL = "https://localhost:44304/api/Inventory";
   const [data, setData] = useState([]);
+  const [value, setValue] = useState("");
+
 
   /**Para cuestiones de API dentro de de; userSelection los campos serían:
   name: "",
@@ -75,6 +77,7 @@ function IngredientsCRUD({ setModalOn, setChoice }) {
 
 
   function peticionPost() {
+    alert(formValues.unidaddemedida);
     fetch(serverURL, {
       method: "POST",
       headers: {
@@ -83,7 +86,7 @@ function IngredientsCRUD({ setModalOn, setChoice }) {
       },
       body: JSON.stringify({
         name: formValues.nombre,
-        unit: formValues.unidaddemedida,
+        UnitofMeasuremen: formValues.unidaddemedida,
         quantity: formValues.cantidad,
         price: formValues.precio,
         brand: formValues.marca,
@@ -129,8 +132,8 @@ function IngredientsCRUD({ setModalOn, setChoice }) {
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="list"
-                    list="units"
+                    type="text"
+                    list="unidaddemedida"
                     name="unidaddemedida"
                     value={formValues.unidaddemedida}
                     onChange={handleChange}
@@ -141,13 +144,13 @@ function IngredientsCRUD({ setModalOn, setChoice }) {
                   >
                     Unidad de Medida
                   </label>
-                  <datalist id="units">
+                  <datalist id="unidaddemedida">
                     <option value="Kg">Kg</option>
-                    <option>G</option>
-                    <option>Oz</option>
-                    <option>Gal</option>
-                    <option>Lt</option>
-                    <option>ml</option>
+                    <option value="G">G</option>
+                    <option value="Oz">Oz</option>
+                    <option value="Gal">Gal</option>
+                    <option value="Lt">Lt</option>
+                    <option value="ml">ml</option>
                   </datalist >
                 </div>
                 <p>{formErrors.unidaddemedida}</p>

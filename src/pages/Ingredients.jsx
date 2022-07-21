@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   GridComponent,
   ColumnsDirective,
@@ -17,6 +17,7 @@ import { IngredientsCRUD } from "./";
 import { useState } from "react";
 
 const Ingredients = () => {
+  const serverURL = "https://localhost:44304/api/Inventory";
   const selectionsettings = { persistSelection: true };
   const toolbarOptions = ["Borrar"];
   const editing = { allowDeleting: true, allowEditing: true };
@@ -26,9 +27,17 @@ const Ingredients = () => {
   }
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [data, setData] = useState([]);
+
   const clicked = () => {
     setModalOn(true);
   };
+
+  useEffect(() => {
+    fetch(serverURL)
+    .then(res=>res.json())
+    .then( data => {setData(data)});
+  });
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -60,7 +69,7 @@ const Ingredients = () => {
         </div>
       </div>
       <GridComponent
-        dataSource={ingredientsData}
+        dataSource={data}
         enableHover={false}
         allowPaging
         pageSettings={{ pageCount: 5 }}

@@ -4,13 +4,6 @@ import { useState, useEffect } from "react";
 function ProductsCRUD({ setModalOn, setChoice }) {
   const serverURL = "https://localhost:44304/api/Users";
   const [data, setData] = useState([]);
-  const [userSelection, setUserSelection] = useState({
-    name: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
 
   const handleOKClick = () => {
     peticionPost();
@@ -76,13 +69,7 @@ function ProductsCRUD({ setModalOn, setChoice }) {
     return errors;
   };
 
-  const handleChange_ = (e) => {
-    const { name, value } = e.target;
-    setUserSelection({
-      ...userSelection,
-      [name]: value,
-    });
-  };
+
 
   function peticionPost() {
     fetch(serverURL, {
