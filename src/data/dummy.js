@@ -449,6 +449,43 @@ export const customersGrid = [
   },
 ];
 
+export const ProductGrid = [
+  { type: "checkbox", width: "50" },
+  {
+    field: "name",
+    headerText: "Nombre",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "description",
+    headerText: "Descripción",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "quantity",
+    headerText: "Cantidad",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "price",
+    headerText: "Precio",
+    width: "120",
+    textAlign: "Center",
+    isPrimaryKey: true,
+  },
+  {
+    field: "discount",
+    headerText: "Descuento",
+    width: "120",
+    textAlign: "Center",
+    isPrimaryKey: true,
+  },
+];
+
+
 export const ingredientsGrid = [
   { type: "checkbox", width: "50" },
   {
