@@ -18,7 +18,7 @@ import { useState } from "react";
 
 const Orders = () => {
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ["Borrar"];
+  const toolbarOptions = ['Edit', 'Delete', 'Update', 'Cancel'];
   const editing = { allowDeleting: true, allowEditing: true };
   const targetEl = document.getElementById("defaultModal");
   {
@@ -70,9 +70,10 @@ const Orders = () => {
         allowSorting
       >
         <ColumnsDirective>
-          {ordersGrid.map((item, index) => (
-            <ColumnDirective key={index} {...item} />
-          ))}
+        <ColumnDirective field="DateOfRealization" headerText="Fecha de Pedido" textAlign="Center" width="150" editType="datepickeredit"/>
+        <ColumnDirective field="TotalPrice" headerText="Precio Total" textAlign="Center" width="150" editType="numericedit"/>
+        <ColumnDirective field="IdState" headerText="Estado de Orden" textAlign="Center" width="150"/>
+        <ColumnDirective field="OrderID" headerText="Número de Orden" textAlign="Center" width="150"/>
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
       </GridComponent>
