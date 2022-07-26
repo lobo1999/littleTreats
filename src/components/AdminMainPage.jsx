@@ -11,6 +11,7 @@ import {
   Ingredients,
   Charges,
   Products,
+  Calendar,
 } from "../pages";
 import { links } from "../data/dummy";
 
@@ -22,6 +23,7 @@ export default function AdminMainPage() {
   const [isCustomersActive, setCustomersActive] = useState(false);
   const [isChargesActive, setChargesActive] = useState(false);
   const [isProductsActive, setProductsActive] = useState(false);
+  const [isCalendarActive, setCalendarActive] = useState(false);
   const [isIngredientsActive, setIngredientsActive] = useState(false);
   const { activeSideBar, setActiveSideBar, screenSize } = useStateContext();
   const activeLink =
@@ -38,6 +40,7 @@ export default function AdminMainPage() {
       setBookActive(false);
       setChargesActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickOrders = () => {
@@ -48,6 +51,7 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickBook = () => {
@@ -58,6 +62,7 @@ export default function AdminMainPage() {
       setChargesActive(false);
       setEcommerceActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickCustomers = () => {
@@ -68,6 +73,7 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickIngredients = () => {
@@ -78,6 +84,7 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickCharges = () => {
@@ -88,10 +95,23 @@ export default function AdminMainPage() {
       setBookActive(false);
       setEcommerceActive(false);
       setProductsActive(false);
+      setCalendarActive(false);
     };
 
     const clickProducts = () => {
       setProductsActive(true);
+      setChargesActive(false);
+      setIngredientsActive(false);
+      setCustomersActive(false);
+      setOrdersActive(false);
+      setBookActive(false);
+      setEcommerceActive(false);
+      setCalendarActive(false);
+    };
+
+    const clickCalendar = () => {
+      setCalendarActive(true);
+      setProductsActive(false);
       setChargesActive(false);
       setIngredientsActive(false);
       setCustomersActive(false);
@@ -141,24 +161,7 @@ export default function AdminMainPage() {
           } else if (link.name === "kanban") {
             return btnHandler(link, handler);
           } else if (link.name === "calendario") {
-            return btnHandler(link, handler);
-          } else if (link.name === "linea") {
-            return btnHandler(link, handler);
-          } else if (link.name === "area") {
-            return btnHandler(link, handler);
-          } else if (link.name === "barras") {
-            return btnHandler(link, handler);
-          } else if (link.name === "pizza") {
-            return btnHandler(link, handler);
-          } else if (link.name === "financiero") {
-            return btnHandler(link, handler);
-          } else if (link.name === "mapa-de-color") {
-            return btnHandler(link, handler);
-          } else if (link.name === "piramide") {
-            return btnHandler(link, handler);
-          } else if (link.name === "editor") {
-            return btnHandler(link, handler);
-          } else if (link.name === "apilado") {
+            handler = clickCalendar;
             return btnHandler(link, handler);
           }
         })}
@@ -197,13 +200,11 @@ export default function AdminMainPage() {
             <Navbar />
 
             {isEcommerceActive ? <Ecommerce /> : null}
-
             {isOrdersActive ? <Orders /> : null}
-
             {isCustomersActive ? <Customers /> : null}
             {isIngredientsActive ? <Ingredients /> : null}
-            {isChargesActive ? <Charges /> : null}
             {isProductsActive ? <Products /> : null}
+            {isCalendarActive ? <Calendar /> : null}
           </div>
         </div>
         <Footer />
