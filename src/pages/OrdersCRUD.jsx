@@ -2,15 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function OrdersCRUD({ setModalOn, setChoice }) {
-  const serverURL = "https://localhost:44304/api/Users";
+  const serverURL = "https://localhost:44304/api/OrderCharge";
   const [data, setData] = useState([]);
-  const [userSelection, setUserSelection] = useState({
-    name: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
+
+  const initialValues = {
+    fechaEntrega: "",
+    precioTotal: "",
+    estado: "",
+    descripcion: "",
+    metodoEntrega: "",
+    cliente: "",
+    direccion: "",
+  };
 
   const handleOKClick = () => {
     peticionPost();
@@ -21,12 +24,7 @@ function OrdersCRUD({ setModalOn, setChoice }) {
     setChoice(false);
     setModalOn(false);
   };
-  const initialValues = {
-    fecha: "",
-    precioTotal: "",
-    teléfono: "",
-    correo: "",
-  };
+  
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -76,13 +74,6 @@ function OrdersCRUD({ setModalOn, setChoice }) {
     return errors;
   };
 
-  const handleChange_ = (e) => {
-    const { name, value } = e.target;
-    setUserSelection({
-      ...userSelection,
-      [name]: value,
-    });
-  };
 
   function peticionPost() {
     fetch(serverURL, {
@@ -140,17 +131,20 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                     datepicker
                     datepicker-autohide
                     type="date"
+                    name="fechaEntrega"
+                    value={formValues.fechaEntrega}
+                    onChange={handleChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-24 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Fecha de Entrega"
                   />
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.fechaEntrega}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="text"
-                    name="preciototal"
-                    value={formValues.lastname}
+                    type="numeric"
+                    name="precioTotal"
+                    value={formValues.precioTotal}
                     onChange={handleChange}
                   />
                   <label
@@ -160,14 +154,14 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                     Precio total
                   </label>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.precioTotal}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="list"
                     list="states"
                     name="estado"
-                    value={formValues.phoneNumber}
+                    value={formValues.estado}
                     onChange={handleChange}
                   />
                   <label
@@ -177,33 +171,18 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                     Estado de Orden
                   </label>
                   <datalist id="states">
-                    <option>En proceso</option>
-                    <option>Entregado</option>
-                    <option>Cancelado</option>
+                    <option value="1">En proceso</option>
+                    <option value="2">Entregado</option>
+                    <option value="3">Cancelado</option>
                   </datalist>
                 </div>
-                <p>{formErrors.username}</p>
+                <p>{formErrors.estado}</p>
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="numeric"
-                    name="orden"
-                    value={formValues.lastname}
-                    onChange={handleChange}
-                  />
-                  <label
-                    for="floating_filled"
-                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                  >
-                    Orden
-                  </label>
-                </div>
-                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
-                  <input
-                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    type="numeric"
+                    type="text"
                     name="descripcion"
-                    value={formValues.lastname}
+                    value={formValues.descripcion}
                     onChange={handleChange}
                   />
                   <label
@@ -216,10 +195,25 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                 <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
                   <input
                     className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    type="text"
+                    name="direccion"
+                    value={formValues.direccion}
+                    onChange={handleChange}
+                  />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Dirección
+                  </label>
+                </div>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
+                  <input
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     type="list"
                     list="deliverMethod"
-                    name="entrega"
-                    value={formValues.lastname}
+                    name="metodoEntrega"
+                    value={formValues.metodoEntrega}
                     onChange={handleChange}
                   />
                   <label
@@ -229,10 +223,31 @@ function OrdersCRUD({ setModalOn, setChoice }) {
                     Método de Entrega
                   </label>
                   <datalist id="deliverMethod">
-                    <option>A domicilio</option>
-                    <option>Recoger</option>
+                    <option value="A domicilio">A domicilio</option>
+                    <option value="Recoger">Recoger</option>
                   </datalist>
                 </div>
+                <div className="relative inline-flex text-gray-500 font-bold md:text-right mb-1 md:mb-4 pr-4">
+                  <input
+                    className="block rounded-t-lg px-14 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    type="list"
+                    list="client"
+                    name="cliente"
+                    value={formValues.cliente}
+                    onChange={handleChange}
+                  />
+                  <label
+                    for="floating_filled"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                  >
+                    Cliente
+                  </label>
+                  <datalist id="client">
+                    <option>Alana Atencio</option>
+                    <option>Emily</option>
+                  </datalist>
+                </div>
+
               </div>
             </form>
           </div>
