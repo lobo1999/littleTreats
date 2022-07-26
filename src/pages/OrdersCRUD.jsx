@@ -22,8 +22,8 @@ function OrdersCRUD({ setModalOn, setChoice }) {
     setModalOn(false);
   };
   const initialValues = {
-    nombre: "",
-    apellido: "",
+    fecha: "",
+    precioTotal: "",
     teléfono: "",
     correo: "",
   };
