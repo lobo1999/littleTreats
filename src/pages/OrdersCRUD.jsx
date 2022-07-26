@@ -238,7 +238,9 @@ function OrdersCRUD({ setModalOn, setChoice }) {
           </div>
           <div className="flex px-16">
             <button
+            
               onClick={handleOKClick}
+              onSubmit={handleSubmit}
               className="rounded px-4 py-2 text-white  bg-green-400 "
             >
               Agregar

@@ -1,49 +1,46 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Register from "./Register";
 
 export default function Login() {
-
-const serverURL = "https://localhost:44304/api/Users";
-let prueba; 
-const [data, setData] = useState([]);
-const[userSelection_, setUserSelection_]=useState({
-     ID: 0,
-     email: '',
-     password: '',
-     role: ''
-}) 
-
-const handleChange=e=>{
-  const {name, value}= e.target;
-  setUserSelection_({
-    ...userSelection_,
-    [name]: value
+  const serverURL = "https://localhost:44304/api/Users";
+  let prueba;
+  const [data, setData] = useState([]);
+  const [userSelection_, setUserSelection_] = useState({
+    ID: 0,
+    email: "",
+    password: "",
+    role: "",
   });
-  console.log(userSelection_)
-}
 
-function peticionGetData(){
-  fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`, {
-  })
-  .then(res=>res.json())
-  .then((result)=>{
-    if(result !== null) {
-      alert(result.email);
-      prueba = true; 
-    }else {
-      alert("La contraseña o el correo electronico están incorrectos");
-      console.log(result);
-      prueba = false;
-    }
-      
-  },(error)=>{
-      alert(error);
-  })
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserSelection_({
+      ...userSelection_,
+      [name]: value,
+    });
+    console.log(userSelection_);
+  };
 
-
-
+  function peticionGetData() {
+    fetch(`${serverURL}/${userSelection_.email}/${userSelection_.password}`, {})
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result !== null) {
+            alert(result.email);
+            prueba = true;
+          } else {
+            alert("La contraseña o el correo electronico están incorrectos");
+            console.log(result);
+            prueba = false;
+          }
+        },
+        (error) => {
+          alert(error);
+        }
+      );
+  }
 
   return (
     <div className="App bg-gray-200 h-screen w-screen relative overflow-hidden flex justify-center items-center">
@@ -55,7 +52,13 @@ function peticionGetData(){
           <div className="text-white font-poppins text-2xl tracking-widest">
             Inicio de Sesión
           </div>
-          <input type="text" placeholder="Correo electrónico" className="input-text" name="email" onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Correo electrónico"
+            className="input-text"
+            name="email"
+            onChange={handleChange}
+          />
           <input
             type="password"
             placeholder="Contraseña"
@@ -64,17 +67,20 @@ function peticionGetData(){
             onChange={handleChange}
           />
 
-          <Link to="/register" className="cursor-pointer text-white font-poppins text-1xl tracking-widest">
+          <Link
+            to="/register"
+            className="cursor-pointer text-white font-poppins text-1xl tracking-widest"
+          >
             Registrarme
           </Link>
 
           <Link to="/adminDashboard">
-          <input
-            type="Submit"
-            value="Iniciar Sesión"
-            className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
-            onClick={()=>peticionGetData()} 
-          />
+            <input
+              type="Submit"
+              value="Iniciar Sesión"
+              className="cursor-pointer font-poppins rounded-full px-6 py-1 bg-white bg-opacity-50 hover:bg-white hover:bg-opacity-80 "
+              onClick={() => peticionGetData()}
+            />
           </Link>
         </form>
       </div>

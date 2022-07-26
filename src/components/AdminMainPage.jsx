@@ -4,26 +4,32 @@ import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Navbar, Footer, ThemeSettings, Sidebar } from "./";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Customers, Orders, Ecommerce, Ingredients, Charges, Products } from "../pages";
+import {
+  Customers,
+  Orders,
+  Ecommerce,
+  Ingredients,
+  Charges,
+  Products,
+} from "../pages";
 import { links } from "../data/dummy";
 
 export default function AdminMainPage() {
   const { activeMenu } = useStateContext();
-  const [ isEcommerceActive, setEcommerceActive] = useState(false);
-  const [ isOrdersActive, setOrdersActive] = useState(false);
-  const [ isBookActive, setBookActive] = useState(false);
-  const [ isCustomersActive, setCustomersActive] = useState(false);
-  const [ isChargesActive, setChargesActive] = useState(false);
-  const [ isProductsActive, setProductsActive] = useState(false);
-  const [ isIngredientsActive, setIngredientsActive] = useState(false);
+  const [isEcommerceActive, setEcommerceActive] = useState(false);
+  const [isOrdersActive, setOrdersActive] = useState(false);
+  const [isBookActive, setBookActive] = useState(false);
+  const [isCustomersActive, setCustomersActive] = useState(false);
+  const [isChargesActive, setChargesActive] = useState(false);
+  const [isProductsActive, setProductsActive] = useState(false);
+  const [isIngredientsActive, setIngredientsActive] = useState(false);
   const { activeSideBar, setActiveSideBar, screenSize } = useStateContext();
   const activeLink =
-  "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
+    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
   const normalLink =
-  "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
+    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
   const btnsCreator = () => {
-    
     const clickEcommmerce = () => {
       setEcommerceActive(true);
       setOrdersActive(false);
@@ -32,8 +38,8 @@ export default function AdminMainPage() {
       setBookActive(false);
       setChargesActive(false);
       setProductsActive(false);
-    }
-  
+    };
+
     const clickOrders = () => {
       setOrdersActive(true);
       setCustomersActive(false);
@@ -42,8 +48,8 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
-    }
-  
+    };
+
     const clickBook = () => {
       setBookActive(true);
       setCustomersActive(false);
@@ -52,8 +58,8 @@ export default function AdminMainPage() {
       setChargesActive(false);
       setEcommerceActive(false);
       setProductsActive(false);
-    }
-    
+    };
+
     const clickCustomers = () => {
       setCustomersActive(true);
       setOrdersActive(false);
@@ -62,8 +68,8 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
-    }
-  
+    };
+
     const clickIngredients = () => {
       setIngredientsActive(true);
       setCustomersActive(false);
@@ -72,7 +78,7 @@ export default function AdminMainPage() {
       setEcommerceActive(false);
       setChargesActive(false);
       setProductsActive(false);
-    }
+    };
 
     const clickCharges = () => {
       setChargesActive(true);
@@ -82,7 +88,7 @@ export default function AdminMainPage() {
       setBookActive(false);
       setEcommerceActive(false);
       setProductsActive(false);
-    }
+    };
 
     const clickProducts = () => {
       setProductsActive(true);
@@ -92,73 +98,74 @@ export default function AdminMainPage() {
       setOrdersActive(false);
       setBookActive(false);
       setEcommerceActive(false);
-    }
+    };
 
     const btnHandler = (element, handlerEvent) => {
-      return <button
-      key={element.name}
-      onClick={handlerEvent}
-      className={`flex justify-items-center px-2 py-3 mb-1 rounded-2xl ${({ isActive }) =>
-      isActive ? activeLink : normalLink}
+      return (
+        <button
+          key={element.name}
+          onClick={handlerEvent}
+          className={`flex justify-items-center px-2 py-3 mb-1 rounded-2xl ${({
+            isActive,
+          }) => (isActive ? activeLink : normalLink)}
       hover:bg-gray-200`}
-    >
-      {element.icon}
-      <span className="capitalize font-semibold ml-2 border-solid">{element.name}</span>
-    </button>;
-    }
+        >
+          {element.icon}
+          <span className="capitalize font-semibold ml-2 border-solid">
+            {element.name}
+          </span>
+        </button>
+      );
+    };
     var handler;
 
-       return links.map((item) => (
-        <div key={item.title}>
-          <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
-          {item.links.map((link) => {
-            if(link.name === "ordenes"){
-              handler = clickOrders;
-              return btnHandler(link, handler);
-            }else if(link.name === "encargos"){
-              handler = clickCharges;
-              return btnHandler(link, handler);
-            }else if(link.name === "clientes"){
-              handler = clickCustomers;
-              return btnHandler(link, handler);
-            }else if(link.name === "comercio"){
-              handler = clickEcommmerce;
-              return btnHandler(link, handler);
-            }else if(link.name === "ingredientes"){
-              handler = clickIngredients;
-              return btnHandler(link, handler);
-            }else if(link.name === "productos"){
-              handler = clickProducts;
-              return btnHandler(link, handler);
-            }else if(link.name === "kanban"){
-              return btnHandler(link, handler);
-            }else if(link.name === "calendario"){
-              return btnHandler(link, handler);
-            }else if(link.name === "linea"){
-              return btnHandler(link, handler);
-            }else if(link.name === "area") {
-              return btnHandler(link, handler);
-            }else if(link.name === "barras"){
-              return btnHandler(link, handler);
-            }else if(link.name === "pizza"){
-              return btnHandler(link, handler);
-            }else if(link.name === "financiero"){
-              return btnHandler(link, handler);
-            }else if(link.name === "mapa-de-color"){
-              return btnHandler(link, handler);
-            }else if(link.name === "piramide"){
-              return btnHandler(link, handler);
-            }else if(link.name === "editor"){
-              return btnHandler(link, handler);
-            }else if(link.name === "apilado"){
-              return btnHandler(link, handler);
-            }
-          })}
-        </div>
-      ))
-  }
-  
-  
+    return links.map((item) => (
+      <div key={item.title}>
+        <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
+        {item.links.map((link) => {
+          if (link.name === "ordenes") {
+            handler = clickOrders;
+            return btnHandler(link, handler);
+          } else if (link.name === "clientes") {
+            handler = clickCustomers;
+            return btnHandler(link, handler);
+          } else if (link.name === "comercio") {
+            handler = clickEcommmerce;
+            return btnHandler(link, handler);
+          } else if (link.name === "ingredientes") {
+            handler = clickIngredients;
+            return btnHandler(link, handler);
+          } else if (link.name === "productos") {
+            handler = clickProducts;
+            return btnHandler(link, handler);
+          } else if (link.name === "kanban") {
+            return btnHandler(link, handler);
+          } else if (link.name === "calendario") {
+            return btnHandler(link, handler);
+          } else if (link.name === "linea") {
+            return btnHandler(link, handler);
+          } else if (link.name === "area") {
+            return btnHandler(link, handler);
+          } else if (link.name === "barras") {
+            return btnHandler(link, handler);
+          } else if (link.name === "pizza") {
+            return btnHandler(link, handler);
+          } else if (link.name === "financiero") {
+            return btnHandler(link, handler);
+          } else if (link.name === "mapa-de-color") {
+            return btnHandler(link, handler);
+          } else if (link.name === "piramide") {
+            return btnHandler(link, handler);
+          } else if (link.name === "editor") {
+            return btnHandler(link, handler);
+          } else if (link.name === "apilado") {
+            return btnHandler(link, handler);
+          }
+        })}
+      </div>
+    ));
+  };
+
   return (
     <div>
       <div className="flex relative dark:bg-main-dark-bg">
@@ -189,31 +196,14 @@ export default function AdminMainPage() {
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
             <Navbar />
 
-            { isEcommerceActive ?
-              <Ecommerce/> : null
-            }
-            
-            {
-              isOrdersActive ? 
-                <Orders/> : null
-            }
+            {isEcommerceActive ? <Ecommerce /> : null}
 
-            {
-              isCustomersActive ? 
-              <Customers/> : null
-            }
-            {
-              isIngredientsActive ? 
-              <Ingredients/> : null
-            }
-            {
-              isChargesActive ? 
-              <Charges/> : null
-            }
-            {
-              isProductsActive ? 
-              <Products/> : null
-            }
+            {isOrdersActive ? <Orders /> : null}
+
+            {isCustomersActive ? <Customers /> : null}
+            {isIngredientsActive ? <Ingredients /> : null}
+            {isChargesActive ? <Charges /> : null}
+            {isProductsActive ? <Products /> : null}
           </div>
         </div>
         <Footer />
