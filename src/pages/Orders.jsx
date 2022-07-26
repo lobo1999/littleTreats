@@ -18,8 +18,8 @@ import { useState } from "react";
 
 const Orders = () => {
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ['Edit', 'Delete', 'Update', 'Cancel'];
-  const editing = { allowDeleting: true, allowEditing: true };
+  const toolbarOptions = ["Edit", "Delete", "Update", "Cancel"];
+  const editing = { allowDeleting: true, allowEditing: true, mode: "Batch" };
   const targetEl = document.getElementById("defaultModal");
   {
     /**const modal = new Modal(targetEl);*/
@@ -32,7 +32,7 @@ const Orders = () => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header title="Órdenes" />   
+      <Header title="Órdenes" />
       <div className="top-left">
         <div>
           <div className="flex justify-center">
@@ -70,10 +70,45 @@ const Orders = () => {
         allowSorting
       >
         <ColumnsDirective>
-        <ColumnDirective field="DateOfRealization" headerText="Fecha de Pedido" textAlign="Center" width="150" editType="datepickeredit"/>
-        <ColumnDirective field="TotalPrice" headerText="Precio Total" textAlign="Center" width="150" editType="numericedit"/>
-        <ColumnDirective field="IdState" headerText="Estado de Orden" textAlign="Center" width="150"/>
-        <ColumnDirective field="OrderID" headerText="Número de Orden" textAlign="Center" width="150"/>
+          <ColumnDirective
+            field="DateOfDeliver"
+            headerText="Fecha de Entrega"
+            textAlign="Center"
+            width="100"
+            editType="datepickeredit"
+          />
+          <ColumnDirective
+            field="TotalPrice"
+            headerText="Precio Total"
+            textAlign="Center"
+            width="75"
+            editType="numericedit"
+          />
+          <ColumnDirective
+            field="IdState"
+            headerText="Estado de Orden"
+            textAlign="Center"
+            width="100"
+            editType="dropdownedit"
+          />
+          <ColumnDirective
+            field="OrderID"
+            headerText="Orden"
+            textAlign="Center"
+            width="50"
+          />
+          <ColumnDirective
+            field="Description"
+            headerText="Descripción"
+            textAlign="Center"
+            width="100"
+          />
+          <ColumnDirective
+            field="DeliveryMethod"
+            headerText="Método de Entrega"
+            textAlign="Center"
+            width="100"
+          />
         </ColumnsDirective>
         <Inject services={[Page, Selection, Toolbar, Edit, Sort, Filter]} />
       </GridComponent>
